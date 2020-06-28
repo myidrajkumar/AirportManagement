@@ -1,0 +1,12 @@
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: airportmanagement
+      
+#      username: 
+#      password:
+
+#      Instead of all above individual configurations, the below can be used as well
+#      uri: mongodb://localhost:27017/airportmanagement
