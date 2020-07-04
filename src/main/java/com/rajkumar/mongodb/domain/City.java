@@ -9,9 +9,9 @@ package com.rajkumar.mongodb.domain;
  */
 public enum City {
 
-	Bangalore("Bangalore"),
-	Chennai("Chennai"),
-	Boston("Boston");
+	BANGALORE("Bangalore"),
+	CHENNAI("Chennai"),
+	BOSTON("Boston");
 	
 	private String name;
 	private City(String city) {

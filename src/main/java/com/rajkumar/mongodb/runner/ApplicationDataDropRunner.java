@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.rajkumar.mongodb;
+package com.rajkumar.mongodb.runner;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

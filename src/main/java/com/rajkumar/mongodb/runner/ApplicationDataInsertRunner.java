@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.rajkumar.mongodb;
+package com.rajkumar.mongodb.runner;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -36,17 +36,11 @@ public class ApplicationDataInsertRunner implements CommandLineRunner {
 	
 	@Override
 	public void run(String... args) throws Exception {
-//		saveEmptyFlight();
 		saveMultipleFlights();
 		logger.info("Multiple Flights inserted.....");
 		
 	}
 
-	private void saveEmptyFlight() {
-		FlightInformation emptyFlight = new FlightInformation();
-		this.mongoTemplate.save(emptyFlight);
-	}
-	
 	private void saveMultipleFlights() {
 		var airIndia = new Aircraft("Air India", 5);
 		var spiceJet = new Aircraft("Spice Jet", 6);
@@ -55,9 +49,9 @@ public class ApplicationDataInsertRunner implements CommandLineRunner {
 		bangaloreToChennaiAirIndia.setAircraft(airIndia);
 		
 		bangaloreToChennaiAirIndia.setDelayed(true);
-		bangaloreToChennaiAirIndia.setDepartureCity(City.Bangalore.getName());
+		bangaloreToChennaiAirIndia.setDepartureCity(City.BANGALORE.getName());
 		bangaloreToChennaiAirIndia.setDepartureDate(LocalDate.now());
-		bangaloreToChennaiAirIndia.setDestinationCity(City.Chennai.getName());
+		bangaloreToChennaiAirIndia.setDestinationCity(City.CHENNAI.getName());
 		bangaloreToChennaiAirIndia.setDurationMin(80);
 		bangaloreToChennaiAirIndia.setType(FlightType.INTERNAL);
 		
@@ -65,9 +59,9 @@ public class ApplicationDataInsertRunner implements CommandLineRunner {
 		bangaloreToChennaiSpiceJet.setAircraft(spiceJet);
 		
 		bangaloreToChennaiSpiceJet.setDelayed(false);
-		bangaloreToChennaiSpiceJet.setDepartureCity(City.Bangalore.getName());
+		bangaloreToChennaiSpiceJet.setDepartureCity(City.BANGALORE.getName());
 		bangaloreToChennaiSpiceJet.setDepartureDate(LocalDate.now());
-		bangaloreToChennaiSpiceJet.setDestinationCity(City.Chennai.getName());
+		bangaloreToChennaiSpiceJet.setDestinationCity(City.CHENNAI.getName());
 		bangaloreToChennaiSpiceJet.setDurationMin(60);
 		bangaloreToChennaiSpiceJet.setType(FlightType.INTERNAL);
 		
@@ -76,9 +70,9 @@ public class ApplicationDataInsertRunner implements CommandLineRunner {
 		bangaloreToBostonAirIndia.setAircraft(airIndia);
 		
 		bangaloreToBostonAirIndia.setDelayed(false);
-		bangaloreToBostonAirIndia.setDepartureCity(City.Bangalore.getName());
+		bangaloreToBostonAirIndia.setDepartureCity(City.BANGALORE.getName());
 		bangaloreToBostonAirIndia.setDepartureDate(LocalDate.now());
-		bangaloreToBostonAirIndia.setDestinationCity(City.Boston.getName());
+		bangaloreToBostonAirIndia.setDestinationCity(City.BOSTON.getName());
 		bangaloreToBostonAirIndia.setDurationMin(280);
 		bangaloreToBostonAirIndia.setType(FlightType.INTERNATIONAL);
 		
@@ -86,9 +80,9 @@ public class ApplicationDataInsertRunner implements CommandLineRunner {
 		bangaloreToBostonSpiceJet.setAircraft(spiceJet);
 		
 		bangaloreToBostonSpiceJet.setDelayed(true);
-		bangaloreToBostonSpiceJet.setDepartureCity(City.Bangalore.getName());
+		bangaloreToBostonSpiceJet.setDepartureCity(City.BANGALORE.getName());
 		bangaloreToBostonSpiceJet.setDepartureDate(LocalDate.now());
-		bangaloreToBostonSpiceJet.setDestinationCity(City.Boston.getName());
+		bangaloreToBostonSpiceJet.setDestinationCity(City.BOSTON.getName());
 		bangaloreToBostonSpiceJet.setDurationMin(480);
 		bangaloreToBostonSpiceJet.setType(FlightType.INTERNATIONAL);
 		
@@ -96,9 +90,9 @@ public class ApplicationDataInsertRunner implements CommandLineRunner {
 		chennaiToBostonSpiceJet.setAircraft(spiceJet);
 		
 		chennaiToBostonSpiceJet.setDelayed(true);
-		chennaiToBostonSpiceJet.setDepartureCity(City.Chennai.getName());
+		chennaiToBostonSpiceJet.setDepartureCity(City.CHENNAI.getName());
 		chennaiToBostonSpiceJet.setDepartureDate(LocalDate.now());
-		chennaiToBostonSpiceJet.setDestinationCity(City.Boston.getName());
+		chennaiToBostonSpiceJet.setDestinationCity(City.BOSTON.getName());
 		chennaiToBostonSpiceJet.setDurationMin(400);
 		chennaiToBostonSpiceJet.setType(FlightType.INTERNATIONAL);
 		

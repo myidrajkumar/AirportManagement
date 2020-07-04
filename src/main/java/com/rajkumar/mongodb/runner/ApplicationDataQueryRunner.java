@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.rajkumar.mongodb;
+package com.rajkumar.mongodb.runner;
 
 import java.util.List;
 
