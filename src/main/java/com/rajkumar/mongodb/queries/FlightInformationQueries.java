@@ -42,8 +42,7 @@ public class FlightInformationQueries {
 	}
 	
 	public List<FlightInformation> findForFiled(String fieldName, String filedValue) {
-		Query fieldQuery = new Query()
-				.addCriteria(Criteria.where(fieldName).is(filedValue));
+		Query fieldQuery = Query.query(Criteria.where(fieldName).is(filedValue));
 		return mongoTemplate.find(fieldQuery, FlightInformation.class);
 	}
 	

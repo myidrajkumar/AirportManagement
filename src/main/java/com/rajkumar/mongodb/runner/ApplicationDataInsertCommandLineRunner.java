@@ -6,15 +6,15 @@ package com.rajkumar.mongodb.runner;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.annotation.Priority;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.core.annotation.Order;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Component;
 
 import com.rajkumar.mongodb.domain.Aircraft;
-import com.rajkumar.mongodb.domain.City;
 import com.rajkumar.mongodb.domain.FlightInformation;
 import com.rajkumar.mongodb.domain.FlightType;
 
@@ -23,14 +23,14 @@ import com.rajkumar.mongodb.domain.FlightType;
  *
  */
 @Component
-@Order(1)
-public class ApplicationDataInsertRunner implements CommandLineRunner {
+@Priority(2)
+public class ApplicationDataInsertCommandLineRunner implements CommandLineRunner {
 
-	static final Logger logger = LogManager.getLogger(ApplicationDataInsertRunner.class);
+	static final Logger logger = LogManager.getLogger(ApplicationDataInsertCommandLineRunner.class);
 	
 	private MongoTemplate mongoTemplate;
 	
-	public ApplicationDataInsertRunner(MongoTemplate mongoTemplate) {
+	public ApplicationDataInsertCommandLineRunner(MongoTemplate mongoTemplate) {
 		this.mongoTemplate = mongoTemplate;
 	}
 	
@@ -49,9 +49,9 @@ public class ApplicationDataInsertRunner implements CommandLineRunner {
 		bangaloreToChennaiAirIndia.setAircraft(airIndia);
 		
 		bangaloreToChennaiAirIndia.setDelayed(true);
-		bangaloreToChennaiAirIndia.setDepartureCity(City.BANGALORE.getName());
+		bangaloreToChennaiAirIndia.setDepartureCity("Bangalore");
 		bangaloreToChennaiAirIndia.setDepartureDate(LocalDate.now());
-		bangaloreToChennaiAirIndia.setDestinationCity(City.CHENNAI.getName());
+		bangaloreToChennaiAirIndia.setDestinationCity("Chennai");
 		bangaloreToChennaiAirIndia.setDurationMin(80);
 		bangaloreToChennaiAirIndia.setType(FlightType.INTERNAL);
 		
@@ -59,9 +59,9 @@ public class ApplicationDataInsertRunner implements CommandLineRunner {
 		bangaloreToChennaiSpiceJet.setAircraft(spiceJet);
 		
 		bangaloreToChennaiSpiceJet.setDelayed(false);
-		bangaloreToChennaiSpiceJet.setDepartureCity(City.BANGALORE.getName());
+		bangaloreToChennaiSpiceJet.setDepartureCity("Bangalore");
 		bangaloreToChennaiSpiceJet.setDepartureDate(LocalDate.now());
-		bangaloreToChennaiSpiceJet.setDestinationCity(City.CHENNAI.getName());
+		bangaloreToChennaiSpiceJet.setDestinationCity("Chennai");
 		bangaloreToChennaiSpiceJet.setDurationMin(60);
 		bangaloreToChennaiSpiceJet.setType(FlightType.INTERNAL);
 		
@@ -70,9 +70,9 @@ public class ApplicationDataInsertRunner implements CommandLineRunner {
 		bangaloreToBostonAirIndia.setAircraft(airIndia);
 		
 		bangaloreToBostonAirIndia.setDelayed(false);
-		bangaloreToBostonAirIndia.setDepartureCity(City.BANGALORE.getName());
+		bangaloreToBostonAirIndia.setDepartureCity("Bangalore");
 		bangaloreToBostonAirIndia.setDepartureDate(LocalDate.now());
-		bangaloreToBostonAirIndia.setDestinationCity(City.BOSTON.getName());
+		bangaloreToBostonAirIndia.setDestinationCity("Boston");
 		bangaloreToBostonAirIndia.setDurationMin(280);
 		bangaloreToBostonAirIndia.setType(FlightType.INTERNATIONAL);
 		
@@ -80,9 +80,9 @@ public class ApplicationDataInsertRunner implements CommandLineRunner {
 		bangaloreToBostonSpiceJet.setAircraft(spiceJet);
 		
 		bangaloreToBostonSpiceJet.setDelayed(true);
-		bangaloreToBostonSpiceJet.setDepartureCity(City.BANGALORE.getName());
+		bangaloreToBostonSpiceJet.setDepartureCity("Bangalore");
 		bangaloreToBostonSpiceJet.setDepartureDate(LocalDate.now());
-		bangaloreToBostonSpiceJet.setDestinationCity(City.BOSTON.getName());
+		bangaloreToBostonSpiceJet.setDestinationCity("Boston");
 		bangaloreToBostonSpiceJet.setDurationMin(480);
 		bangaloreToBostonSpiceJet.setType(FlightType.INTERNATIONAL);
 		
@@ -90,13 +90,23 @@ public class ApplicationDataInsertRunner implements CommandLineRunner {
 		chennaiToBostonSpiceJet.setAircraft(spiceJet);
 		
 		chennaiToBostonSpiceJet.setDelayed(true);
-		chennaiToBostonSpiceJet.setDepartureCity(City.CHENNAI.getName());
+		chennaiToBostonSpiceJet.setDepartureCity("Chennai");
 		chennaiToBostonSpiceJet.setDepartureDate(LocalDate.now());
-		chennaiToBostonSpiceJet.setDestinationCity(City.BOSTON.getName());
+		chennaiToBostonSpiceJet.setDestinationCity("Boston");
 		chennaiToBostonSpiceJet.setDurationMin(400);
 		chennaiToBostonSpiceJet.setType(FlightType.INTERNATIONAL);
 		
 		var flightsList = List.of(bangaloreToBostonAirIndia, bangaloreToBostonSpiceJet, bangaloreToChennaiAirIndia, bangaloreToChennaiSpiceJet, chennaiToBostonSpiceJet);
+		
+		/**
+		 * 'Save' is used here but not the correct approach
+		 * 
+		 * 'Insert' --> Inserts single doc and throws error if 'id' already exists
+		 * 'InsertMany' --> Inserts multiple documents
+		 * 'Save' --> If 'Id' is not present, inserts else completely replaces with new document
+		 * 'Update' --> Updates only the fields in the document
+		 * 'UpdateMulti' --> Updates multiple documents in the collection
+		 */
 		flightsList.forEach(mongoTemplate::save);
 	}
 

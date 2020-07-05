@@ -5,10 +5,11 @@ package com.rajkumar.mongodb.runner;
 
 import java.util.List;
 
+import javax.annotation.Priority;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import com.rajkumar.mongodb.domain.FlightInformation;
@@ -20,7 +21,7 @@ import com.rajkumar.mongodb.queries.FlightInformationQueries;
  *
  */
 @Component
-@Order(2)
+@Priority(3)
 public class ApplicationDataQueryRunner implements CommandLineRunner {
 
 	static final Logger logger = LogManager.getLogger(ApplicationDataQueryRunner.class);
@@ -84,7 +85,7 @@ public class ApplicationDataQueryRunner implements CommandLineRunner {
 	private void queryCountOfInternationalFlights() {
 		long count = flightInformationQueries.countInternationalFlights(FlightType.INTERNATIONAL);
 		logger.info(count);
-		logger.info("International Flights clount is queried.....");
+		logger.info("International Flights count is queried.....");
 	}
 	
 	private void queryForDepartureFiled() {

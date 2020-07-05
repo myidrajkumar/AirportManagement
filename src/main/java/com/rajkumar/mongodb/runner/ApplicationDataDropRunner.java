@@ -3,10 +3,11 @@
  */
 package com.rajkumar.mongodb.runner;
 
+import javax.annotation.Priority;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.core.annotation.Order;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Component;
  *
  */
 @Component
-@Order(3)
+@Priority(1)
 public class ApplicationDataDropRunner implements CommandLineRunner {
 
 	static final Logger logger = LogManager.getLogger(ApplicationDataDropRunner.class);

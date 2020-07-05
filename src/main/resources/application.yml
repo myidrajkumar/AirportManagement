@@ -10,3 +10,7 @@ spring:
 
 #      Instead of all above individual configurations, the below can be used as well
 #      uri: mongodb://localhost:27017/airportmanagement
+
+logging:
+  level:
+    org.springframework.data.mongodb.core.MongoTemplate: DEBUG

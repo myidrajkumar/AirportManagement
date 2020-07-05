@@ -38,6 +38,7 @@ public class FlightInformation {
 	private int durationMin;
 	private LocalDate departureDate;
 	private Aircraft aircraft;
+	private String description;
 	
 	@Transient
 	private LocalDate createdAt;
